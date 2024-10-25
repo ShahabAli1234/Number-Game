@@ -1,38 +1,261 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
+  flex-direction: column;
+}
+
+.noToGuess {
+  margin-top: 120px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.noToGuess h2 {
+  font-size: 40px;
+  /* background-color: #f0f0f0; */
+  padding: 15px;
+  letter-spacing: 5px;
+  border-radius: 10px;
+  color: #333;
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.noToGuess button {
+  border: none;
+  font-weight: bold;
+  font-size: 30px;
+  color: #ffffff;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.noToGuess button:hover {
+  background-color: #2563eb;
+}
+.guessed {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  position: sticky;  /* Makes the element sticky */
+  top: 10px;         /* Sticks the element 20px from the top */
+  z-index: 100;      /* Ensures it appears above other elements */
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow */
+  border-radius: 10px;
+  height: auto;
+}
+
+.guessed form {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+}
+
+.guessedInput {
+  padding: 15px 20px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  width: 300px;
+}
+
+.guessedInput:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="submit"] {
+  padding: 15px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+input[type="submit"]:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+.tableContainer {
+  width: 80%;
+  margin: 60px auto;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+
+.guessTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  text-align: left;
+}
+
+.guessTable thead {
+  background-color: #3b82f6;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.guessTable th, .guessTable td {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.guessTable tbody tr {
+  transition: background-color 0.3s;
+}
+
+.guessTable tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.guessTable tbody td {
+  color: #333;
+}
+
+.guessTable th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.guessTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Success message styling */
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  background: #e0f7fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: bounceIn 0.5s ease-in-out;
+}
+
+.congratsText {
+  font-size: 24px;
+  color: #2d6a4f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* "Play Again" button styling */
+.playAgainButton {
+  background-color: #2474ff;
+  color: white;
+  font-size: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.playAgainButton:hover {
+  background-color: #053fa4;
+}
+
+/* Animation for success message */
+@keyframes bounceIn {
+  0% {
+      transform: scale(0.5);
+      opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+      transform: scale(1.1);
+      opacity: 1;
   }
+  100% {
+      transform: scale(1);
+  }
+}
+.infoButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 23px;
+  border-radius: 23px;
+}
+
+.infoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: white;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+.infoContent p {
+  font-size: 19px;
+}
+.closeButton {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: bold;
 }
